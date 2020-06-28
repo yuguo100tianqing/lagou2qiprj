@@ -4,6 +4,7 @@
 # auth by yuguotianqing01
 # date 2020/06/28
 # python实战一#作业：创建模块，模块里面创建方法，定义有参数，和无参，有返回值和无返回值 的情况，并说明 无返回值的默认返回值。
+# girlfrend类实现
 class girlfrend():
     have_girl = False
 
