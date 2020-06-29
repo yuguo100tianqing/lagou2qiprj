@@ -1,0 +1,11 @@
+cat:
+  name: Qiansuisui
+  color: black
+  age: 3
+  sex: male
+
+dog:
+  name: Erha
+  color: yellow
+  age: 5
+  sex: famale
