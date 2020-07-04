@@ -14,27 +14,36 @@ import pytest
 import yaml
 
 try:
-    data = yaml.load(open("./cal.yml", encoding='UTF-8'), yaml.FullLoader)
+    with open("./cal.yml", encoding='UTF-8') as f:
+        data = yaml.safe_load(f)
     print(data)
     print("111")
 except FileNotFoundError:
-    print("文件未找到！")
+    print("测试数据文件未找到！")
 
 
-class TestCal():
-
-    @pytest.mark.parametrize(['a', 'b', 'value'], data['add'])
-    def test_add(self, calinit, a, b, value):
-        assert value == calinit.add(a, b)
-
-    @pytest.mark.parametrize(['a', 'b', 'value'], data['sub'])
-    def test_sub(self, calinit, a, b, value):
-        assert value == calinit.sub(a, b)
-
+class TestCal:
+    @pytest.mark.run(order=3)
+    @pytest.mark.dependency(name='mul')
     @pytest.mark.parametrize(['a', 'b', 'value'], data['mul'])
     def test_mul(self, calinit, a, b, value):
         assert value == calinit.mul(a, b)
 
+    @pytest.mark.run(order=4)
+    @pytest.mark.dependency(depends=['mul'])
     @pytest.mark.parametrize(['a', 'b', 'value'], data['dev'])
     def test_dev(self, calinit, a, b, value):
         assert value == calinit.dev(a, b)
+
+    @pytest.mark.run(order=1)
+    @pytest.mark.dependency(name='add')
+    @pytest.mark.parametrize(['a', 'b', 'value'], data['add'])
+    def check_add(self, calinit, a, b, value, cmdoption):
+        print(f"{cmdoption['host']}")
+        assert value == calinit.add(a, b)
+
+    @pytest.mark.run(order=2)
+    @pytest.mark.dependency(depends=['add'])
+    @pytest.mark.parametrize(['a', 'b', 'value'], data['sub'])
+    def check_sub(self, calinit, a, b, value):
+        assert value == calinit.sub(a, b)
