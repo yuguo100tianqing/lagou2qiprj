@@ -41,6 +41,7 @@ class TestCookies:
         try:
             with open("cookie.json", "w") as f:
                 json.dump(cookies, f)
+                assert True
         except:
             print("打开文件失败")
             assert False

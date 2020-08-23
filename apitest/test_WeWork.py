@@ -87,3 +87,4 @@ class TestWeworkAccess:
         res = self.s.post(url=f"https://qyapi.weixin.qq.com/cgi-bin/user/delete")
         print(res.json())
         assert res.json()["errcode"] == 0
+

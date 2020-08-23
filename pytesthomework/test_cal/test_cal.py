@@ -27,6 +27,7 @@ class TestCal:
     @pytest.mark.dependency(name='mul')
     @pytest.mark.parametrize(['a', 'b', 'value'], data['mul'])
     def test_mul(self, calinit, a, b, value):
+        print(data)
         assert value == calinit.mul(a, b)
 
     @pytest.mark.run(order=4)

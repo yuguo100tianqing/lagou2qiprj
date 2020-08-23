@@ -1,0 +1,11 @@
+default:
+  Wan1: 1_TR069_R_VID_46
+  Wan2: 2_INTERNET_R_VID_101
+  Wan3: none
+  Wan4: none
+
+dog:
+  name: Erha
+  color: yellow
+  age: 5
+  sex: famale
